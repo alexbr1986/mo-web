@@ -3,12 +3,194 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mo-layout</artifactId>
-    <groupId>sabre.autotests.web</groupId>
+    <groupId>sabre.autotests.moweb</groupId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>mo-web-steps</module>
+        <module>mo-web-core</module>
         <module>mo-web-tests</module>
+        <module>mo-web-tests-ui</module>
     </modules>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>resources</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.2.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.tngtech.junit.dataprovider</groupId>
+                <artifactId>junit-jupiter-dataprovider</artifactId>
+                <version>2.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>26.0-jre</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-java</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-support</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.seleniumhq.selenium</groupId>
+                <artifactId>selenium-remote-driver</artifactId>
+                <version>${selenium.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.yandex.qatools.ashot</groupId>
+                <artifactId>ashot</artifactId>
+                <version>1.5.4</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>selenium-java</artifactId>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.yandex.qatools.htmlelements</groupId>
+                <artifactId>htmlelements-java</artifactId>
+                <version>1.19</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>selenium-java</artifactId>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.yandex.qatools.htmlelements</groupId>
+                <artifactId>htmlelements-matchers</artifactId>
+                <version>1.19</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.yandex.qatools.matchers</groupId>
+                <artifactId>common-matchers</artifactId>
+                <version>${matchers.java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.yandex.qatools.matchers</groupId>
+                <artifactId>matcher-decorators</artifactId>
+                <version>${matchers.java.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.yandex.qatools.matchers</groupId>
+                <artifactId>webdriver-matchers</artifactId>
+                <version>${matchers.java.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>selenium-java</artifactId>
+                        <groupId>org.seleniumhq.selenium</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.yandex.qatools.allure</groupId>
+                <artifactId>allure-junit-adaptor</artifactId>
+                <version>${allure.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hamcrest</groupId>
+                <artifactId>hamcrest-all</artifactId>
+                <version>1.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.jayway.restassured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>2.9.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.lanwen.diff</groupId>
+                <artifactId>uri-differ-lib</artifactId>
+                <version>1.3.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ru.qatools.commons</groupId>
+                <artifactId>properties</artifactId>
+                <version>2.0.RC6</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.25</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>1.7.25</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <properties>
+        <matchers.java.version>1.4.1</matchers.java.version>
+        <selenium.version>3.14.0</selenium.version>
+        <webdriver.driver>remote</webdriver.driver>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <allure.version>1.5.4</allure.version>
+        <aspectj.version>1.8.10</aspectj.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
 </project>
